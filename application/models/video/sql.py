@@ -1,5 +1,6 @@
 from uuid import uuid4
 
+from sqlalchemy import event
 from sqlalchemy.dialects.postgresql import UUID
 
 from application.extensions import db
@@ -41,3 +42,8 @@ class Video(db.Model):
     )
 
     view_count = db.Column(db.Integer)
+
+
+@event.listens_for(Video, "after_update")
+def increase_course_view_count(mapper, connection, target: Video) -> None:
+    Video.view_count = target.view_count + 1

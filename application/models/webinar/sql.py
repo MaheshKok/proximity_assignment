@@ -1,6 +1,7 @@
 from datetime import datetime
 from uuid import uuid4
 
+from sqlalchemy import event
 from sqlalchemy.dialects.postgresql import UUID
 
 from application.extensions import db
@@ -48,3 +49,8 @@ class Webinar(db.Model):
     )
 
     view_count = db.Column(db.Integer)
+
+
+@event.listens_for(Webinar, "after_update")
+def increase_course_view_count(mapper, connection, target: Webinar) -> None:
+    Webinar.view_count = target.view_count + 1
