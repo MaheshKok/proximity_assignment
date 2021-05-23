@@ -15,3 +15,5 @@ class VideoFactory(factory.alchemy.SQLAlchemyModelFactory):
 
     name = factory.sequence(lambda n: f"test_video_{n}")
     instructor = factory.SubFactory(UserFactory)
+
+    view_count = 1

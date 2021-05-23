@@ -20,3 +20,5 @@ class WebinarFactory(factory.alchemy.SQLAlchemyModelFactory):
 
     tag = factory.SubFactory(TagFactory)
     instructor = factory.SubFactory(UserFactory)
+
+    view_count = 1
