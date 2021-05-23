@@ -2,6 +2,7 @@
 this file contains many to many relationship between models
 """
 from sqlalchemy.dialects.postgresql import UUID
+
 from application.extensions import db
 from application.models import constants
 

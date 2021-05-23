@@ -1,4 +1,5 @@
 import os
+
 import pytest
 from flask.app import Flask
 from flask.testing import FlaskClient

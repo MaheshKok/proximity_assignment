@@ -1,9 +1,9 @@
 from flask_rest_jsonapi import Api
 
-from application.blueprints.apis.course.api import CourseList, CourseDetail
-from application.blueprints.apis.subject.api import SubjectList, SubjectDetail
+from application.blueprints.apis.course.api import CourseDetail, CourseList
+from application.blueprints.apis.subject.api import SubjectDetail, SubjectList
 from application.blueprints.apis.tag.api import TagDetail, TagList
-from application.blueprints.apis.user.api import UserList, UserDetail
+from application.blueprints.apis.user.api import UserDetail, UserList
 from application.blueprints.apis.video.api import VideoDetail, VideoList
 from application.blueprints.apis.webinar.api import WebinarDetail, WebinarList
 

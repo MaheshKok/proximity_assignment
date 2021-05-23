@@ -1,6 +1,8 @@
 from datetime import datetime
 from uuid import uuid4
+
 from sqlalchemy.dialects.postgresql import UUID
+
 from application.extensions import db
 from application.models import constants
 

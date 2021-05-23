@@ -1,9 +1,8 @@
 from flask import Flask
 
 from application.blueprints.apis.views import register_json_routes
-from application.extensions.database import register_database
-
 from application.extensions import register_extensions
+from application.extensions.database import register_database
 
 
 def _create_app():

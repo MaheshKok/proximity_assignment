@@ -1,4 +1,5 @@
 import factory
+
 from application.extensions import db
 from application.models.subject.sql import Subject
 from application.tests.factories.user import UserFactory

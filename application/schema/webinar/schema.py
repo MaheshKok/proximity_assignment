@@ -1,6 +1,5 @@
 from marshmallow_jsonapi import fields
-from marshmallow_jsonapi.flask import Relationship
-from marshmallow_jsonapi.flask import Schema
+from marshmallow_jsonapi.flask import Relationship, Schema
 
 
 class WebinarSchema(Schema):

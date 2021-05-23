@@ -1,6 +1,7 @@
 import factory
-from application.models.course.sql import Course
+
 from application.extensions import db
+from application.models.course.sql import Course
 from application.tests.factories.user import UserFactory
 
 

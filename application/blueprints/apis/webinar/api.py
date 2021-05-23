@@ -1,5 +1,6 @@
 from flask import request
-from flask_rest_jsonapi import ResourceDetail, ResourceRelationship, ResourceList
+from flask_rest_jsonapi import (ResourceDetail, ResourceList,
+                                ResourceRelationship)
 from flask_rest_jsonapi.exceptions import AccessDenied
 
 from application.extensions import db
@@ -9,6 +10,7 @@ from application.models.webinar.sql import Webinar
 from application.schema.webinar.schema import WebinarSchema
 
 
+# Create resource managers
 class WebinarDetail(ResourceDetail):
     schema = WebinarSchema
     data_layer = {"session": db.session, "model": Webinar}

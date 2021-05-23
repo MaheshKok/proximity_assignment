@@ -1,10 +1,12 @@
-from flask_rest_jsonapi import ResourceDetail, ResourceRelationship, ResourceList
+from flask_rest_jsonapi import (ResourceDetail, ResourceList,
+                                ResourceRelationship)
 
 from application.extensions import db
 from application.models.user.sql import User
 from application.schema.user.schema import UserSchema
 
 
+# Create resource managers
 class UserDetail(ResourceDetail):
     schema = UserSchema
     data_layer = {"session": db.session, "model": User}

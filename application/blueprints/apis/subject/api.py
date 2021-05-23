@@ -1,5 +1,6 @@
 from flask import request
-from flask_rest_jsonapi import ResourceDetail, ResourceRelationship, ResourceList
+from flask_rest_jsonapi import (ResourceDetail, ResourceList,
+                                ResourceRelationship)
 from flask_rest_jsonapi.exceptions import AccessDenied
 
 from application.extensions import db
@@ -9,6 +10,7 @@ from application.models.user.sql import User
 from application.schema.subject.schema import SubjectSchema
 
 
+# Create resource managers
 class SubjectDetail(ResourceDetail):
     schema = SubjectSchema
     data_layer = {"session": db.session, "model": Subject}

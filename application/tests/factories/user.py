@@ -1,8 +1,7 @@
-from datetime import datetime
-
 import factory
-from application.models.user.sql import User
+
 from application.extensions import db
+from application.models.user.sql import User
 
 
 class UserFactory(factory.alchemy.SQLAlchemyModelFactory):

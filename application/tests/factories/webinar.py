@@ -1,8 +1,9 @@
 from datetime import datetime
 
 import factory
-from application.models.webinar.sql import Webinar
+
 from application.extensions import db
+from application.models.webinar.sql import Webinar
 from application.tests.factories.tag import TagFactory
 from application.tests.factories.user import UserFactory
 
