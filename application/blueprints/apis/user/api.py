@@ -1,5 +1,6 @@
-from flask_rest_jsonapi import (ResourceDetail, ResourceList,
-                                ResourceRelationship)
+from flask_rest_jsonapi import ResourceDetail
+from flask_rest_jsonapi import ResourceList
+from flask_rest_jsonapi import ResourceRelationship
 
 from application.extensions import db
 from application.models.user.sql import User

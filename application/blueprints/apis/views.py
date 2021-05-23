@@ -1,11 +1,17 @@
 from flask_rest_jsonapi import Api
 
-from application.blueprints.apis.course.api import CourseDetail, CourseList
-from application.blueprints.apis.subject.api import SubjectDetail, SubjectList
-from application.blueprints.apis.tag.api import TagDetail, TagList
-from application.blueprints.apis.user.api import UserDetail, UserList
-from application.blueprints.apis.video.api import VideoDetail, VideoList
-from application.blueprints.apis.webinar.api import WebinarDetail, WebinarList
+from application.blueprints.apis.course.api import CourseDetail
+from application.blueprints.apis.course.api import CourseList
+from application.blueprints.apis.subject.api import SubjectDetail
+from application.blueprints.apis.subject.api import SubjectList
+from application.blueprints.apis.tag.api import TagDetail
+from application.blueprints.apis.tag.api import TagList
+from application.blueprints.apis.user.api import UserDetail
+from application.blueprints.apis.user.api import UserList
+from application.blueprints.apis.video.api import VideoDetail
+from application.blueprints.apis.video.api import VideoList
+from application.blueprints.apis.webinar.api import WebinarDetail
+from application.blueprints.apis.webinar.api import WebinarList
 
 
 def register_json_routes(app):

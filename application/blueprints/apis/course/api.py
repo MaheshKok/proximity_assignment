@@ -1,6 +1,7 @@
 from flask import request
-from flask_rest_jsonapi import (ResourceDetail, ResourceList,
-                                ResourceRelationship)
+from flask_rest_jsonapi import ResourceDetail
+from flask_rest_jsonapi import ResourceList
+from flask_rest_jsonapi import ResourceRelationship
 from flask_rest_jsonapi.exceptions import AccessDenied
 
 from application.extensions import db
@@ -20,7 +21,7 @@ class CourseDetail(ResourceDetail):
         if logged_in_user.role != INSTRUCTOR:
             raise AccessDenied(
                 {"parameter": "logged_in_user_id"},
-                f"Only Instructors are allowed to delete course",
+                "Only Instructors are allowed to delete course",
             )
 
     def before_patch(self, args, kwargs, data=None):
@@ -28,7 +29,7 @@ class CourseDetail(ResourceDetail):
         if logged_in_user.role != INSTRUCTOR:
             raise AccessDenied(
                 {"parameter": "logged_in_user_id"},
-                f"Only Instructors are allowed to update course",
+                "Only Instructors are allowed to update course",
             )
 
 
