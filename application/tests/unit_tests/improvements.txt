@@ -1,0 +1,2 @@
+1. setup git pre commit hooks to run black, isort and flake8 to ensure consistency before commiting code to repo
+2. 
