@@ -2,7 +2,6 @@ import factory
 
 from application.extensions import db
 from application.models.user.sql import User
-from application.tests.factories import CourseFactory, SubjectFactory, TagFactory, VideoFactory, WebinarFactory
 
 
 class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
@@ -13,11 +12,3 @@ class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
 
     name = factory.sequence(lambda n: f"test_user_{n}")
     role = "instructor"
-
-    course = factory.SubFactory(CourseFactory)
-    Subject = factory.SubFactory(SubjectFactory)
-    tag = factory.SubFactory(TagFactory)
-    video = factory.SubFactory(VideoFactory)
-    webinar = factory.SubFactory(WebinarFactory)
-
-    view_count = 1

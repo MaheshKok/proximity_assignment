@@ -1,4 +1,4 @@
-from application.tests.factories import UserFactory
+from application.tests.factories.user import UserFactory
 
 
 def test_webinar(app):
@@ -9,10 +9,12 @@ def test_webinar(app):
             "data": {
                 "type": "webinar",
                 "attributes": {
-                   "name": "test-webinar-2",
-                    "instructor_id": instructor.id
+                    "name": "test-webinar-2",
+                    "instructor_id": instructor.id,
                 },
             }
         },
+        headers={"Content-Type": "application/vnd.api+json"},
     )
+
     assert response.status_code == 201

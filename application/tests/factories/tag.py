@@ -2,7 +2,7 @@ import factory
 
 from application.extensions import db
 from application.models.tag.sql import Tag
-from application.tests.factories import UserFactory
+from application.tests.factories.user import UserFactory
 
 
 class TagFactory(factory.alchemy.SQLAlchemyModelFactory):
