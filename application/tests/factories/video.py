@@ -4,7 +4,7 @@ import factory
 
 from application.extensions import db
 from application.models.video.sql import Video
-from application.tests.factories.user import UserFactory
+from application.tests.factories import UserFactory
 
 
 class VideoFactory(factory.alchemy.SQLAlchemyModelFactory):

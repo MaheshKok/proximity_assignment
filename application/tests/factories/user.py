@@ -2,11 +2,7 @@ import factory
 
 from application.extensions import db
 from application.models.user.sql import User
-from application.tests.factories.course import CourseFactory
-from application.tests.factories.subject import SubjectFactory
-from application.tests.factories.tag import TagFactory
-from application.tests.factories.video import VideoFactory
-from application.tests.factories.webinar import WebinarFactory
+from application.tests.factories import CourseFactory, SubjectFactory, TagFactory, VideoFactory, WebinarFactory
 
 
 class UserFactory(factory.alchemy.SQLAlchemyModelFactory):

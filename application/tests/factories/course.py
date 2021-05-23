@@ -1,15 +1,15 @@
 import factory
 
 from application.extensions import db
-from application.models.course.sql import Course
-from application.tests.factories.tag import TagFactory
-from application.tests.factories.user import UserFactory
-from application.tests.factories.video import VideoFactory
-from application.tests.factories.webinar import WebinarFactory
+
+from application.tests.factories import  TagFactory, VideoFactory, WebinarFactory
+from application.tests.factories import UserFactory
 
 
 class CourseFactory(factory.alchemy.SQLAlchemyModelFactory):
+
     class Meta:
+        from application.models.course.sql import Course
         model = Course
         sqlalchemy_session = db.session
         sqlalchemy_session_persistence = "commit"

@@ -3,13 +3,12 @@ from datetime import datetime
 import factory
 
 from application.extensions import db
-from application.models.webinar.sql import Webinar
 from application.tests.factories.tag import TagFactory
-from application.tests.factories.user import UserFactory
 
 
 class WebinarFactory(factory.alchemy.SQLAlchemyModelFactory):
     class Meta:
+        from application.models.webinar.sql import Webinar
         model = Webinar
         sqlalchemy_session = db.session
         sqlalchemy_session_persistence = "commit"

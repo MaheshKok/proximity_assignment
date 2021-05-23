@@ -14,9 +14,7 @@ def init_app():
     """
     Automatically create a Flask app instance.
     """
-    constants.SQLALCHEMY_DATABASE_URI = os.environ.get(
-        "SQLALCHEMY_TEST_DATABASE_URI", f"{constants.SQLALCHEMY_DATABASE_URI }_test"
-    )
+    constants.SQLALCHEMY_DATABASE_URI = f"{constants.SQLALCHEMY_DATABASE_URI }_test"
     return create_test_app()
 
 
