@@ -12,24 +12,10 @@ class SubjectSchema(Schema):
     id = fields.UUID(as_string=True, dump_only=True)
     name = fields.Str(required=True)
 
-    instructor_id = fields.UUID(as_string=True,required=True)
-    instructor = Relationship(
-        schema="UserSchema",
-        type_="user",
-    )
+    instructor_id = fields.UUID(as_string=True, required=True)
+    instructor = Relationship(schema="UserSchema", type_="user",)
 
     tag_id = fields.UUID(as_string=True)
-    tag = Relationship(
-        schema="TagSchema",
-        type_="tag",
-    )
-    webinars = Relationship(
-        schema="WebinarSchema",
-        type_="webinar",
-        many=True
-    )
-    videos = Relationship(
-        schema="VideoSchema",
-        type_="video",
-        many=True
-    )
+    tag = Relationship(schema="TagSchema", type_="tag",)
+    webinars = Relationship(schema="WebinarSchema", type_="webinar", many=True)
+    videos = Relationship(schema="VideoSchema", type_="video", many=True)

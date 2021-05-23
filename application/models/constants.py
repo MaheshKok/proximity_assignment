@@ -26,4 +26,3 @@ class VIDEO:
 class WEBINAR:
     TABLE_NAME = "webinar"
     OBJ_NAME = "Webinar"
-

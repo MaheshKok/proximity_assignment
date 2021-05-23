@@ -36,4 +36,3 @@ class User(db.Model):
         back_populates="instructor",
         cascade="save-update, all, delete-orphan",
     )
-

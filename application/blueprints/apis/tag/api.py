@@ -17,16 +17,17 @@ class TagDetail(ResourceDetail):
         logged_in_user = User.query.get(request.headers.get("logged_in_user_id"))
         if logged_in_user.role != INSTRUCTOR:
             raise AccessDenied(
-                {"parameter": "logged_in_user_id"}, f"Only Instructors are allowed to delete tag"
+                {"parameter": "logged_in_user_id"},
+                f"Only Instructors are allowed to delete tag",
             )
 
     def before_patch(self, args, kwargs, data=None):
         logged_in_user = User.query.get(request.headers.get("logged_in_user_id"))
         if logged_in_user.role != INSTRUCTOR:
             raise AccessDenied(
-                {"parameter": "logged_in_user_id"}, f"Only Instructors are allowed to update tag"
+                {"parameter": "logged_in_user_id"},
+                f"Only Instructors are allowed to update tag",
             )
-
 
 
 class TagList(ResourceList):
@@ -34,9 +35,6 @@ class TagList(ResourceList):
     data_layer = {"session": db.session, "model": Tag}
 
 
-
-
 class TagRelationship(ResourceRelationship):
     schema = TagSchema
     data_layer = {"session": db.session, "model": Tag}
-

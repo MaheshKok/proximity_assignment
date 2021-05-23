@@ -17,21 +17,22 @@ class WebinarDetail(ResourceDetail):
         logged_in_user = User.query.get(request.headers.get("logged_in_user_id"))
         if logged_in_user.role != INSTRUCTOR:
             raise AccessDenied(
-                {"parameter": "logged_in_user_id"}, f"Only Instructors are allowed to delete webinar"
+                {"parameter": "logged_in_user_id"},
+                f"Only Instructors are allowed to delete webinar",
             )
 
     def before_patch(self, args, kwargs, data=None):
         logged_in_user = User.query.get(request.headers.get("logged_in_user_id"))
         if logged_in_user.role != INSTRUCTOR:
             raise AccessDenied(
-                {"parameter": "logged_in_user_id"}, f"Only Instructors are allowed to update webinar"
+                {"parameter": "logged_in_user_id"},
+                f"Only Instructors are allowed to update webinar",
             )
 
 
 class WebinarList(ResourceList):
     schema = WebinarSchema
     data_layer = {"session": db.session, "model": Webinar}
-
 
 
 class WebinarRelationship(ResourceRelationship):

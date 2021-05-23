@@ -14,23 +14,10 @@ class VideoSchema(Schema):
     view_count = fields.Integer()
 
     course_id = fields.UUID(as_string=True)
-    course = Relationship(
-        schema="courseSchema",
-        type_="course",
-    )
+    course = Relationship(schema="courseSchema", type_="course",)
     subject_id = fields.UUID(as_string=True)
-    subject = Relationship(
-        schema="subjectSchema",
-        type_="subject",
-    )
+    subject = Relationship(schema="subjectSchema", type_="subject",)
     tag_id = fields.UUID(as_string=True)
-    tag = Relationship(
-        schema="TagSchema",
-        type_="tag",
-    )
-    instructor_id = fields.UUID(as_string=True,required=True)
-    instructor = Relationship(
-        schema="UserSchema",
-        type_="user",
-    )
-
+    tag = Relationship(schema="TagSchema", type_="tag",)
+    instructor_id = fields.UUID(as_string=True, required=True)
+    instructor = Relationship(schema="UserSchema", type_="user",)

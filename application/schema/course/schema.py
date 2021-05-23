@@ -14,23 +14,9 @@ class CourseSchema(Schema):
 
     view_count = fields.Integer()
     instructor_id = fields.UUID(as_string=True, required=True)
-    instructor = Relationship(
-        schema="UserSchema",
-        type_="user",
-    )
+    instructor = Relationship(schema="UserSchema", type_="user",)
 
     tag_id = fields.UUID(as_string=True)
-    tag = Relationship(
-        schema="TagSchema",
-        type_="tag",
-    )
-    webinars = Relationship(
-        schema="WebinarSchema",
-        type_="webinar",
-        many=True
-    )
-    videos = Relationship(
-        schema="VideoSchema",
-        type_="video",
-        many=True
-    )
+    tag = Relationship(schema="TagSchema", type_="tag",)
+    webinars = Relationship(schema="WebinarSchema", type_="webinar", many=True)
+    videos = Relationship(schema="VideoSchema", type_="video", many=True)

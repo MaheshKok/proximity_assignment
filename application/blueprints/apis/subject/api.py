@@ -17,14 +17,16 @@ class SubjectDetail(ResourceDetail):
         logged_in_user = User.query.get(request.headers.get("logged_in_user_id"))
         if logged_in_user.role != INSTRUCTOR:
             raise AccessDenied(
-                {"parameter": "logged_in_user_id"}, f"Only Instructors are allowed to delete subject"
+                {"parameter": "logged_in_user_id"},
+                f"Only Instructors are allowed to delete subject",
             )
 
     def before_patch(self, args, kwargs, data=None):
         logged_in_user = User.query.get(request.headers.get("logged_in_user_id"))
         if logged_in_user.role != INSTRUCTOR:
             raise AccessDenied(
-                {"parameter": "logged_in_user_id"}, f"Only Instructors are allowed to update subject"
+                {"parameter": "logged_in_user_id"},
+                f"Only Instructors are allowed to update subject",
             )
 
 
@@ -33,8 +35,6 @@ class SubjectList(ResourceList):
     data_layer = {"session": db.session, "model": Subject}
 
 
-
 class SubjectRelationship(ResourceRelationship):
     schema = SubjectSchema
     data_layer = {"session": db.session, "model": Subject}
-

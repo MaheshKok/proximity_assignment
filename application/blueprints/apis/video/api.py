@@ -17,22 +17,22 @@ class VideoDetail(ResourceDetail):
         logged_in_user = User.query.get(request.headers.get("logged_in_user_id"))
         if logged_in_user.role != INSTRUCTOR:
             raise AccessDenied(
-                {"parameter": "logged_in_user_id"}, f"Only Instructors are allowed to delete video"
+                {"parameter": "logged_in_user_id"},
+                f"Only Instructors are allowed to delete video",
             )
 
     def before_patch(self, args, kwargs, data=None):
         logged_in_user = User.query.get(request.headers.get("logged_in_user_id"))
         if logged_in_user.role != INSTRUCTOR:
             raise AccessDenied(
-                {"parameter": "logged_in_user_id"}, f"Only Instructors are allowed to edit video"
+                {"parameter": "logged_in_user_id"},
+                f"Only Instructors are allowed to edit video",
             )
 
 
 class VideoList(ResourceList):
     schema = VideoSchema
     data_layer = {"session": db.session, "model": Video}
-
-
 
 
 class VideoRelationship(ResourceRelationship):
