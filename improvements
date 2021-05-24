@@ -3,4 +3,7 @@
 3. store user info to flask g context so that we can use it anywhere without the need to pass it in Authorization header
 4. use git pre commit hooks to scan all the files to be committed for syntax check using flake8, beautified using black, organize import statements using isort and many more
 5. for logging use sentry its one of the best service for logging exceptions and log data. it reduces the pain in finding the actual cause within minutes and can make development much faster
-6.
+6. custom exceptions can be created on demand
+7. all logging should be logged to google cloud or any other cloud
+8. need to setup migration in long term. as its a POC i didnt went with migrations
+9.

@@ -9,7 +9,5 @@ def register_database(app):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
     db.init_app(app)
 
-    # migrate.init_app(app, db)
-
     with app.app_context():
         db.create_all()
