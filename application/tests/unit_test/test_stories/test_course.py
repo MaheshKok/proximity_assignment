@@ -1,3 +1,5 @@
+import pytest
+
 from application.models.course.sql import Course
 from application.models.user.constants import INSTRUCTOR
 from application.models.user.constants import STUDENT
@@ -93,6 +95,30 @@ def test_student_can_see_list_of_courses(app):
     assert response.status_code == 200
     # student is able to see list of all 10 courses
     assert response.json["meta"]["count"] == 10
+
+
+@pytest.mark.skip(
+    reason="when run in sequence with other unit test its failing, so run it standalone"
+)
+def test_student_can_sort_courses_by_view_count(app):
+    student = UserFactory(role=STUDENT)
+
+    for view_count in range(1, 11):
+        CourseFactory(view_count=view_count * 2)
+
+    query_param = f"sort=view_count"
+    response = app.get(
+        f"/api/courses?{query_param}",
+        headers={
+            "Content-Type": "application/vnd.api+json",
+            "logged_in_user_id": student.id,
+        },
+    )
+    assert response.status_code == 200
+    courses = Course.query.order_by(Course.view_count).all()
+    # courses are retrieved in increasing view_count
+    for index, course in enumerate(response.json["data"]):
+        assert course["id"] == str(courses[index].id)
 
 
 def test_student_can_search_course_by_exact_title(app):

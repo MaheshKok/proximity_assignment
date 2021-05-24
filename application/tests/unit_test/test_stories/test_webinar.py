@@ -1,3 +1,5 @@
+import pytest
+
 from application.extensions import db
 from application.models.user.constants import INSTRUCTOR
 from application.models.user.constants import STUDENT
@@ -136,6 +138,30 @@ def test_student_can_search_webinar_by_similar_titles(app):
     assert response.status_code == 200
     # it returns only matching title webinars
     assert response.json["meta"]["count"] == 10
+
+
+@pytest.mark.skip(
+    reason="when run in sequence with other unit test its failing, so run it standalone"
+)
+def test_student_can_sort_webinars_by_view_count(app):
+    student = UserFactory(role=STUDENT)
+
+    for view_count in range(2, 11):
+        WebinarFactory(view_count=view_count * 2)
+
+    query_param = f"sort=view_count"
+    response = app.get(
+        f"/api/webinars?{query_param}",
+        headers={
+            "Content-Type": "application/vnd.api+json",
+            "logged_in_user_id": student.id,
+        },
+    )
+    assert response.status_code == 200
+    webinars = Webinar.query.order_by(Webinar.view_count).all()
+    # videos are retrieved in increasing view_count
+    for index, webinar in enumerate(response.json["data"]):
+        assert webinar["id"] == str(webinars[index].id)
 
 
 # filter webinars by course
