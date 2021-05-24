@@ -80,7 +80,7 @@ def test_student_can_see_list_of_tags(app):
     TagFactory.create_batch(10)
 
     response = app.get(
-        f"/api/tags",
+        "/api/tags",
         headers={
             "Content-Type": "application/vnd.api+json",
             "logged_in_user_id": student.id,

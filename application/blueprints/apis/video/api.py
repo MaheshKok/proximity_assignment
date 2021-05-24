@@ -29,13 +29,21 @@ class VideoDetail(ResourceDetail):
         if logged_in_user.role != INSTRUCTOR:
             raise AccessDenied(
                 {"parameter": "logged_in_user_id"},
-                "Only Instructors are allowed to edit video",
+                "Only Instructors are allowed to update video",
             )
 
 
 class VideoList(ResourceList):
     schema = VideoSchema
     data_layer = {"session": db.session, "model": Video}
+
+    def before_post(self, args, kwargs, data=None):
+        logged_in_user = User.query.get(request.headers.get("logged_in_user_id"))
+        if logged_in_user.role != INSTRUCTOR:
+            raise AccessDenied(
+                {"parameter": "logged_in_user_id"},
+                "Only Instructors are allowed to upload video",
+            )
 
 
 class VideoRelationship(ResourceRelationship):
