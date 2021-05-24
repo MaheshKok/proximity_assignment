@@ -1,2 +1,0 @@
-STUDENT = "student"
-INSTRUCTOR = "instructor"
