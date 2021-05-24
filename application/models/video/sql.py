@@ -26,23 +26,23 @@ class Video(db.Model):
     instructor_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.USER.TABLE_NAME}.id", ondelete="CASCADE"),
-        nullable=False
+        nullable=False,
     )
     instructor = db.relationship(constants.USER.OBJ_NAME, back_populates="videos")
     course_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.COURSE.TABLE_NAME}.id", ondelete="CASCADE"),
-        nullable=True
+        nullable=True,
     )
     subject_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.SUBJECT.TABLE_NAME}.id", ondelete="CASCADE"),
-        nullable=True
+        nullable=True,
     )
     tag_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.TAG.TABLE_NAME}.id", ondelete="CASCADE"),
-        nullable=True
+        nullable=True,
     )
 
     view_count = db.Column(db.Integer, default=1)

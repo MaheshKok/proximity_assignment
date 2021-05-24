@@ -21,14 +21,14 @@ class Course(db.Model):
     instructor_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.USER.TABLE_NAME}.id", ondelete="CASCADE"),
-        nullable=False
+        nullable=False,
     )
     instructor = db.relationship(constants.USER.OBJ_NAME, back_populates="courses")
 
     tag_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.TAG.TABLE_NAME}.id", ondelete="CASCADE"),
-        nullable=True
+        nullable=True,
     )
 
     webinars = db.relationship(constants.WEBINAR.OBJ_NAME, backref="course")

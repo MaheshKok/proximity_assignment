@@ -25,31 +25,33 @@ class Webinar(db.Model):
 
     # personal details
     title = db.Column(db.String, nullable=False)
-    start_time = db.Column(db.TIMESTAMP(timezone=True), default=datetime.now(), nullable=False)
+    start_time = db.Column(
+        db.TIMESTAMP(timezone=True), default=datetime.now(), nullable=False
+    )
     duration = db.Column(db.FLOAT, nullable=False)
 
     # relationship details
     instructor_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.USER.TABLE_NAME}.id", ondelete="CASCADE"),
-        nullable=False
+        nullable=False,
     )
     instructor = db.relationship(constants.USER.OBJ_NAME, back_populates="webinars")
 
     course_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.COURSE.TABLE_NAME}.id", ondelete="CASCADE"),
-        nullable=True
+        nullable=True,
     )
     subject_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.SUBJECT.TABLE_NAME}.id", ondelete="CASCADE"),
-        nullable=True
+        nullable=True,
     )
     tag_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.TAG.TABLE_NAME}.id", ondelete="CASCADE"),
-        nullable=True
+        nullable=True,
     )
 
     view_count = db.Column(db.Integer, default=1)
