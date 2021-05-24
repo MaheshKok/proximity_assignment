@@ -14,11 +14,12 @@ class Tag(db.Model):
     )
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    title = db.Column(db.String)
+    title = db.Column(db.String, nullable=False)
 
     instructor_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.USER.TABLE_NAME}.id", ondelete="CASCADE"),
+        nullable=False
     )
     instructor = db.relationship(constants.USER.OBJ_NAME, back_populates="tags")
     courses = db.relationship(constants.COURSE.OBJ_NAME, backref="tag")

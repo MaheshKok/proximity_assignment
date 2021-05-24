@@ -24,31 +24,35 @@ class Webinar(db.Model):
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
 
     # personal details
-    title = db.Column(db.String)
-    start_time = db.Column(db.TIMESTAMP, default=datetime.now())
-    duration = db.Column(db.FLOAT)
+    title = db.Column(db.String, nullable=False)
+    start_time = db.Column(db.TIMESTAMP(timezone=True), default=datetime.now(), nullable=False)
+    duration = db.Column(db.FLOAT, nullable=False)
 
     # relationship details
     instructor_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.USER.TABLE_NAME}.id", ondelete="CASCADE"),
+        nullable=False
     )
     instructor = db.relationship(constants.USER.OBJ_NAME, back_populates="webinars")
 
     course_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.COURSE.TABLE_NAME}.id", ondelete="CASCADE"),
+        nullable=True
     )
     subject_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.SUBJECT.TABLE_NAME}.id", ondelete="CASCADE"),
+        nullable=True
     )
     tag_id = db.Column(
         UUID(as_uuid=True),
         db.ForeignKey(f"{constants.TAG.TABLE_NAME}.id", ondelete="CASCADE"),
+        nullable=True
     )
 
-    view_count = db.Column(db.Integer)
+    view_count = db.Column(db.Integer, default=1)
 
 
 @event.listens_for(Webinar, "after_update")

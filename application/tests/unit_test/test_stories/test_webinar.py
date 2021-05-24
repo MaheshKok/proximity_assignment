@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import pytest
 
 from application.extensions import db
@@ -24,6 +26,7 @@ def test_instructor_can_add_tag_while_uploading_webinar(app):
                 "attributes": {
                     "title": "test-webinar-2",
                     "instructor_id": instructor.id,
+                    "duration": 60,
                 },
                 "relationships": {"tag": {"data": {"type": "tag", "id": tag.id}}},
             }
