@@ -11,7 +11,7 @@ from application.tests.factories.user import UserFactory
 from application.tests.factories.video import VideoFactory
 
 
-# please look for video being filtered by courses, subjects and tags @line:138
+# please look for video being filtered by courses, subjects and tags @line:165
 # Instructor related test stories
 def test_instructor_can_add_tag_while_uploading_video(app):
     instructor = UserFactory(role=INSTRUCTOR)

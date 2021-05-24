@@ -12,7 +12,7 @@ from application.tests.factories.tag import TagFactory
 from application.tests.factories.user import UserFactory
 from application.tests.factories.webinar import WebinarFactory
 
-# please look for webinar being filtered by courses, subjects and tags @line:141
+# please look for webinar being filtered by courses, subjects and tags @line:171
 
 # Instructor related test stories
 def test_instructor_can_add_tag_while_uploading_webinar(app):
