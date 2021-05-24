@@ -116,7 +116,7 @@ def test_student_can_search_course_by_exact_title(app):
 def test_student_can_search_course_by_similar_titles(app):
     student = UserFactory(role=STUDENT)
     CourseFactory.create_batch(10)
-    for c in range(1,11):
+    for c in range(1, 11):
         CourseFactory(title=f"random_course_{c}")
 
     query_param = 'filter=[{"name":"title","op":"match","val":"test_course"}]'
