@@ -95,7 +95,7 @@ def test_student_can_see_list_of_courses(app):
     assert response.json["meta"]["count"] == 10
 
 
-def test_student_can_search_course_by_title(app):
+def test_student_can_search_course_by_exact_title(app):
     student = UserFactory(role=STUDENT)
     CourseFactory.create_batch(10)
 
@@ -111,3 +111,22 @@ def test_student_can_search_course_by_title(app):
     assert response.json["data"][0]["id"] == str(
         Course.query.filter_by(title="test_course_1").scalar().id
     )
+
+
+def test_student_can_search_course_by_similar_titles(app):
+    student = UserFactory(role=STUDENT)
+    CourseFactory.create_batch(10)
+    for c in range(1,11):
+        CourseFactory(title=f"random_course_{c}")
+
+    query_param = 'filter=[{"name":"title","op":"match","val":"test_course"}]'
+    response = app.get(
+        f"/api/courses?{query_param}",
+        headers={
+            "Content-Type": "application/vnd.api+json",
+            "logged_in_user_id": student.id,
+        },
+    )
+    assert response.status_code == 200
+    # it returns only matching title courses
+    assert response.json["meta"]["count"] == 10
