@@ -8,8 +8,8 @@ from application.tests.factories.tag import TagFactory
 from application.tests.factories.user import UserFactory
 from application.tests.factories.video import VideoFactory
 
-# please look for video being filtered by courses, subjects and tags @line:138
 
+# please look for video being filtered by courses, subjects and tags @line:138
 # Instructor related test stories
 def test_instructor_can_add_tag_while_uploading_video(app):
     instructor = UserFactory(role=INSTRUCTOR)
@@ -101,7 +101,8 @@ def test_student_can_search_video_by_exact_title(app):
     student = UserFactory(role=STUDENT)
     VideoFactory.create_batch(10)
 
-    query_param = "filter[title]=test_video_1"
+    video_title = Video.query.all()[0].title
+    query_param = f"filter[title]={video_title}"
     response = app.get(
         f"/api/videos?{query_param}",
         headers={
@@ -111,7 +112,7 @@ def test_student_can_search_video_by_exact_title(app):
     )
     assert response.status_code == 200
     assert response.json["data"][0]["id"] == str(
-        Video.query.filter_by(title="test_video_1").scalar().id
+        Video.query.filter_by(title=f"{video_title}").scalar().id
     )
 
 

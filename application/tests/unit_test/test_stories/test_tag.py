@@ -96,7 +96,8 @@ def test_student_can_search_tag_by_exact_title(app):
     student = UserFactory(role=STUDENT)
     TagFactory.create_batch(10)
 
-    query_param = "filter[title]=test_tag_1"
+    tag_title = Tag.query.all()[0].title
+    query_param = f"filter[title]={tag_title}"
     response = app.get(
         f"/api/tags?{query_param}",
         headers={
@@ -106,7 +107,7 @@ def test_student_can_search_tag_by_exact_title(app):
     )
     assert response.status_code == 200
     assert response.json["data"][0]["id"] == str(
-        Tag.query.filter_by(title="test_tag_1").scalar().id
+        Tag.query.filter_by(title=f"{tag_title}").scalar().id
     )
 
 

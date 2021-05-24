@@ -56,7 +56,7 @@ def test_instructor_can_update_course(app):
     )
     assert response.status_code == 200
     # assert course name gets updated
-    assert course.name == updated_title
+    assert course.title == updated_title
 
 
 def test_instructor_can_delete_course(app):
@@ -99,7 +99,8 @@ def test_student_can_search_course_by_exact_title(app):
     student = UserFactory(role=STUDENT)
     CourseFactory.create_batch(10)
 
-    query_param = "filter[title]=test_course_1"
+    course_title = Course.query.all()[0].title
+    query_param = f"filter[title]={course_title}"
     response = app.get(
         f"/api/courses?{query_param}",
         headers={
@@ -109,7 +110,7 @@ def test_student_can_search_course_by_exact_title(app):
     )
     assert response.status_code == 200
     assert response.json["data"][0]["id"] == str(
-        Course.query.filter_by(title="test_course_1").scalar().id
+        Course.query.filter_by(title=f"{course_title}").scalar().id
     )
 
 

@@ -37,7 +37,7 @@ def test_instructor_can_add_tag_while_uploading_webinar(app):
     ).scalar()
     assert str(webinar.id) == response.json["data"]["id"]
     # tag attached while creating webinar is assigned to the webinar
-    assert Webinar.tag == tag
+    assert webinar.tag == tag
 
 
 def test_instructor_can_update_webinar(app):
@@ -104,7 +104,8 @@ def test_student_can_search_webinar_by_exact_title(app):
     student = UserFactory(role=STUDENT)
     WebinarFactory.create_batch(10)
 
-    query_param = "filter[title]=test_webinar_1"
+    webinar_title = Webinar.query.all()[0].title
+    query_param = f"filter[title]={webinar_title}"
     response = app.get(
         f"/api/webinars?{query_param}",
         headers={
@@ -114,7 +115,7 @@ def test_student_can_search_webinar_by_exact_title(app):
     )
     assert response.status_code == 200
     assert response.json["data"][0]["id"] == str(
-        Webinar.query.filter_by(title="test_webinar_1").scalar().id
+        Webinar.query.filter_by(title=f"{webinar_title}").scalar().id
     )
 
 

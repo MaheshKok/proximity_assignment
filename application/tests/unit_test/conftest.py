@@ -51,9 +51,12 @@ def clear_database():
     """Automatically truncate all database tables between tests runs."""
     yield
     ext.db.session.remove()
-    ext.db.session.execute(
-        f'TRUNCATE TABLE {", ".join(ext.db.engine.table_names())} RESTART IDENTITY CASCADE;'
-    )
+    for table in ext.db.engine.table_names():
+        if table != "user":
+            ext.db.session.execute(f"TRUNCATE TABLE {table} RESTART IDENTITY CASCADE;")
+    # ext.db.session.execute(
+    #     f'TRUNCATE TABLE {", ".join(ext.db.engine.table_names())} RESTART IDENTITY CASCADE;'
+    # )
     ext.db.session.commit()
 
 

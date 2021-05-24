@@ -99,7 +99,8 @@ def test_student_can_search_subject_by_exact_title(app):
     student = UserFactory(role=STUDENT)
     SubjectFactory.create_batch(10)
 
-    query_param = "filter[title]=test_subject_1"
+    subject_title = Subject.query.all()[0].title
+    query_param = f"filter[title]={subject_title}"
     response = app.get(
         f"/api/subjects?{query_param}",
         headers={
@@ -109,7 +110,7 @@ def test_student_can_search_subject_by_exact_title(app):
     )
     assert response.status_code == 200
     assert response.json["data"][0]["id"] == str(
-        Subject.query.filter_by(title="test_subject_1").scalar().id
+        Subject.query.filter_by(title=f"{subject_title}").scalar().id
     )
 
 
