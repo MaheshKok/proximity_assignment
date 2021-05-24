@@ -127,3 +127,72 @@ def test_student_can_search_tag_by_similar_titles(app):
     assert response.status_code == 200
     # it returns only matching title tags
     assert response.json["meta"]["count"] == 10
+
+
+# student negation unit test
+def test_student_cannot_create_tag(app):
+    student = UserFactory(role=STUDENT)
+    response = app.post(
+        "/api/tags",
+        json={
+            "data": {
+                "type": "tag",
+                "attributes": {"title": "test-tag-2", "instructor_id": student.id},
+            }
+        },
+        headers={
+            "Content-Type": "application/vnd.api+json",
+            "logged_in_user_id": student.id,
+        },
+    )
+    assert response.status_code == 403
+    assert response.json["errors"][0]["title"] == "Access denied"
+    assert (
+        response.json["errors"][0]["source"]
+        == "Only Instructors are allowed to create tag"
+    )
+
+
+def test_student_cannot_update_tag(app):
+    student = UserFactory(role=STUDENT)
+    tag = TagFactory(instructor=student)
+
+    updated_title = "updated_title"
+    response = app.patch(
+        f"/api/tags/{tag.id}",
+        json={
+            "data": {
+                "type": "tag",
+                "id": tag.id,
+                "attributes": {"title": updated_title},
+            }
+        },
+        headers={
+            "Content-Type": "application/vnd.api+json",
+            "logged_in_user_id": student.id,
+        },
+    )
+    assert response.status_code == 403
+    assert response.json["errors"][0]["title"] == "Access denied"
+    assert (
+        response.json["errors"][0]["source"]
+        == "Only Instructors are allowed to update tag"
+    )
+
+
+def test_student_cannot_delete_tag(app):
+    student = UserFactory(role=STUDENT)
+    tag = TagFactory(instructor=student)
+    response = app.delete(
+        f"/api/tags/{tag.id}",
+        headers={
+            "Content-Type": "application/vnd.api+json",
+            "logged_in_user_id": student.id,
+        },
+    )
+    assert response.status_code == 403
+    assert response.json["errors"][0]["title"] == "Access denied"
+    assert (
+        response.json["errors"][0]["source"]
+        == "Only Instructors are allowed to delete tag"
+    )

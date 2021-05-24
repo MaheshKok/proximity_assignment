@@ -130,3 +130,72 @@ def test_student_can_search_course_by_similar_titles(app):
     assert response.status_code == 200
     # it returns only matching title courses
     assert response.json["meta"]["count"] == 10
+
+
+# Negation unit test for student
+def test_student_cannot_upload_course(app):
+    student = UserFactory(role=STUDENT)
+    response = app.post(
+        "/api/courses",
+        json={
+            "data": {
+                "type": "course",
+                "attributes": {"title": "test-course-2", "instructor_id": student.id},
+            }
+        },
+        headers={
+            "Content-Type": "application/vnd.api+json",
+            "logged_in_user_id": student.id,
+        },
+    )
+    assert response.status_code == 403
+    assert response.json["errors"][0]["title"] == "Access denied"
+    assert (
+        response.json["errors"][0]["source"]
+        == "Only Instructors are allowed to create course"
+    )
+
+
+def test_student_cannot_update_course(app):
+    student = UserFactory(role=STUDENT)
+    course = CourseFactory(instructor=student)
+
+    updated_title = "updated_title"
+    response = app.patch(
+        f"/api/courses/{course.id}",
+        json={
+            "data": {
+                "type": "course",
+                "id": course.id,
+                "attributes": {"title": updated_title},
+            }
+        },
+        headers={
+            "Content-Type": "application/vnd.api+json",
+            "logged_in_user_id": student.id,
+        },
+    )
+    assert response.status_code == 403
+    assert response.json["errors"][0]["title"] == "Access denied"
+    assert (
+        response.json["errors"][0]["source"]
+        == "Only Instructors are allowed to update course"
+    )
+
+
+def test_student_cannot_delete_course(app):
+    student = UserFactory(role=STUDENT)
+    course = CourseFactory(instructor=student)
+    response = app.delete(
+        f"/api/courses/{course.id}",
+        headers={
+            "Content-Type": "application/vnd.api+json",
+            "logged_in_user_id": student.id,
+        },
+    )
+    assert response.status_code == 403
+    assert response.json["errors"][0]["title"] == "Access denied"
+    assert (
+        response.json["errors"][0]["source"]
+        == "Only Instructors are allowed to delete course"
+    )
