@@ -27,7 +27,7 @@ def test_instructor_can_create_course(app):
     assert response.status_code == 201
     assert (
         str(
-            Course.query.filter_by(name="test-course-2", instructor_id=instructor.id)
+            Course.query.filter_by(title="test-course-2", instructor_id=instructor.id)
             .scalar()
             .id
         )
@@ -39,14 +39,14 @@ def test_instructor_can_update_course(app):
     instructor = UserFactory(role=INSTRUCTOR)
     course = CourseFactory(instructor=instructor)
 
-    updated_name = "updated_name"
+    updated_title = "updated_title"
     response = app.patch(
         f"/api/courses/{course.id}",
         json={
             "data": {
                 "type": "course",
                 "id": course.id,
-                "attributes": {"title": updated_name},
+                "attributes": {"title": updated_title},
             }
         },
         headers={
@@ -56,7 +56,7 @@ def test_instructor_can_update_course(app):
     )
     assert response.status_code == 200
     # assert course name gets updated
-    assert course.name == updated_name
+    assert course.name == updated_title
 
 
 def test_instructor_can_delete_course(app):
