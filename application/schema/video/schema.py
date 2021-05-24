@@ -11,14 +11,14 @@ class VideoSchema(Schema):
         self_view_many = "video_list"
 
     id = fields.UUID(as_string=True, dump_only=True)
-    title = fields.Str(required=True)
-    view_count = fields.Integer()
+    title = fields.Str(required=True, allow_none=False)
+    view_count = fields.Integer(default=1, missing=1)
 
-    course_id = fields.UUID(as_string=True)
+    course_id = fields.UUID(as_string=True, required=False)
     course = Relationship(schema="courseSchema", type_="course",)
-    subject_id = fields.UUID(as_string=True)
+    subject_id = fields.UUID(as_string=True, required=False)
     subject = Relationship(schema="subjectSchema", type_="subject",)
-    tag_id = fields.UUID(as_string=True)
+    tag_id = fields.UUID(as_string=True, required=False)
     tag = Relationship(schema="TagSchema", type_="tag",)
     instructor_id = fields.UUID(as_string=True, required=True)
     instructor = Relationship(schema="UserSchema", type_="user",)

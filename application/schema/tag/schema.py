@@ -15,7 +15,7 @@ class TagSchema(Schema):
 
     courses = Relationship(schema="CourseSchema", type_="course", many=True)
     subjects = Relationship(schema="SubjectSchema", type_="subject", many=True)
-    instructor_id = fields.UUID(as_string=True, required=True)
+    instructor_id = fields.UUID(as_string=True, required=True, allow_none=False)
     instructor = Relationship(schema="UserSchema", type_="user",)
     webinars = Relationship(schema="WebinarSchema", type_="webinar", many=True)
     videos = Relationship(schema="VideoSchema", type_="video", many=True)

@@ -297,7 +297,7 @@ def test_student_cannot_upload_webinar(app):
         json={
             "data": {
                 "type": "webinar",
-                "attributes": {"title": "test-webinar-2", "instructor_id": student.id},
+                "attributes": {"title": "test-webinar-2", "instructor_id": student.id, "duration": 60},
             }
         },
         headers={
