@@ -13,7 +13,7 @@ class Webinar(db.Model):
     # this will ensure no duplicate data in database
     __table_args__ = (
         db.UniqueConstraint(
-            "name",
+            "title",
             "instructor_id",
             "subject_id",
             "course_id",
@@ -24,7 +24,7 @@ class Webinar(db.Model):
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
 
     # personal details
-    name = db.Column(db.String)
+    title = db.Column(db.String)
     start_time = db.Column(db.TIMESTAMP, default=datetime.now())
     duration = db.Column(db.FLOAT)
 

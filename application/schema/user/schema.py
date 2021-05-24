@@ -11,7 +11,7 @@ class UserSchema(Schema):
         self_view_many = "user_list"
 
     id = fields.UUID(as_string=True, dump_only=True)
-    name = fields.Str(required=True)
+    title = fields.Str(required=True)
     role = fields.Str(required=True)
 
     courses = Relationship(schema="CourseSchema", type_="course", many=True)

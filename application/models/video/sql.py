@@ -12,7 +12,7 @@ class Video(db.Model):
     #  # this will ensure no duplicate data in database
     __table_args__ = (
         db.UniqueConstraint(
-            "name",
+            "title",
             "instructor_id",
             "subject_id",
             "course_id",
@@ -21,7 +21,7 @@ class Video(db.Model):
     )
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    name = db.Column(db.String)
+    title = db.Column(db.String)
 
     instructor_id = db.Column(
         UUID(as_uuid=True),

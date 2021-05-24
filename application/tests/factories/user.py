@@ -10,5 +10,5 @@ class UserFactory(factory.alchemy.SQLAlchemyModelFactory):
         sqlalchemy_session = db.session
         sqlalchemy_session_persistence = "commit"
 
-    name = factory.sequence(lambda n: f"test_user_{n}")
+    title = factory.sequence(lambda n: f"test_user_{n}")
     role = "instructor"

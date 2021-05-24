@@ -11,7 +11,7 @@ class CourseSchema(Schema):
         self_view_many = "course_list"
 
     id = fields.UUID(as_string=True, dump_only=True)
-    name = fields.Str(required=True)
+    title = fields.Str(required=True)
 
     view_count = fields.Integer()
     instructor_id = fields.UUID(as_string=True, required=True)

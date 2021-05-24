@@ -11,7 +11,7 @@ class VideoSchema(Schema):
         self_view_many = "video_list"
 
     id = fields.UUID(as_string=True, dump_only=True)
-    name = fields.Str(required=True)
+    title = fields.Str(required=True)
     view_count = fields.Integer()
 
     course_id = fields.UUID(as_string=True)

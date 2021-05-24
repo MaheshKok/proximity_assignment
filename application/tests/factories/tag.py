@@ -11,5 +11,5 @@ class TagFactory(factory.alchemy.SQLAlchemyModelFactory):
         sqlalchemy_session = db.session
         sqlalchemy_session_persistence = "commit"
 
-    name = factory.sequence(lambda n: f"test_tag_{n}")
+    title = factory.sequence(lambda n: f"test_tag_{n}")
     instructor = factory.SubFactory(UserFactory)

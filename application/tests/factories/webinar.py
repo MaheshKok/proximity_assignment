@@ -13,7 +13,7 @@ class WebinarFactory(factory.alchemy.SQLAlchemyModelFactory):
         sqlalchemy_session = db.session
         sqlalchemy_session_persistence = "commit"
 
-    name = factory.sequence(lambda n: f"test_webinar_{n}")
+    title = factory.sequence(lambda n: f"test_webinar_{n}")
     start_time = datetime.now()
     duration = 60
 

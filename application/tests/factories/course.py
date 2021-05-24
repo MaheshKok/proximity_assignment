@@ -11,7 +11,7 @@ class CourseFactory(factory.alchemy.SQLAlchemyModelFactory):
         sqlalchemy_session = db.session
         sqlalchemy_session_persistence = "commit"
 
-    name = factory.sequence(lambda n: f"test_course_{n}")
+    title = factory.sequence(lambda n: f"test_course_{n}")
     instructor = factory.SubFactory(UserFactory)
 
     view_count = 1

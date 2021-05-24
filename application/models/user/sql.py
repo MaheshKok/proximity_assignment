@@ -10,7 +10,7 @@ class User(db.Model):
     __tablename__ = constants.USER.TABLE_NAME
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    name = db.Column(db.String)
+    title = db.Column(db.String)
     role = db.Column(db.String)
 
     courses = db.relationship(

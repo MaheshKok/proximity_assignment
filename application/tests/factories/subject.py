@@ -11,5 +11,5 @@ class SubjectFactory(factory.alchemy.SQLAlchemyModelFactory):
         sqlalchemy_session = db.session
         sqlalchemy_session_persistence = "commit"
 
-    name = factory.sequence(lambda n: f"test_subject_{n}")
+    title = factory.sequence(lambda n: f"test_subject_{n}")
     instructor = factory.SubFactory(UserFactory)

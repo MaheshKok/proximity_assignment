@@ -11,7 +11,7 @@ class SubjectSchema(Schema):
         self_view_many = "subject_list"
 
     id = fields.UUID(as_string=True, dump_only=True)
-    name = fields.Str(required=True)
+    title = fields.Str(required=True)
 
     instructor_id = fields.UUID(as_string=True, required=True)
     instructor = Relationship(schema="UserSchema", type_="user",)

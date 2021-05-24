@@ -10,11 +10,13 @@ class Subject(db.Model):
     __tablename__ = constants.SUBJECT.TABLE_NAME
     # this will ensure no duplicate subject shall exist in database
     __table_args__ = (
-        db.UniqueConstraint("name", "instructor_id", name="uix_subject_per_instructor"),
+        db.UniqueConstraint(
+            "title", "instructor_id", name="uix_subject_per_instructor"
+        ),
     )
 
     id = db.Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    name = db.Column(db.String)
+    title = db.Column(db.String)
 
     instructor_id = db.Column(
         UUID(as_uuid=True),
